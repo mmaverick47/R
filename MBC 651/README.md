@@ -2,4 +2,4 @@
 
 No required textbooks. Weekly articles included.
 
-Software: Microsoft Excel, RStudio
+Software: Microsoft Excel, Microsoft Access, RStudio
