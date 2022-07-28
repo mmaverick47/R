@@ -1,3 +1,3 @@
 # R
 
-R code examples
+Examples of R code projects
