@@ -1,0 +1,110 @@
+<!-- R Commander Markdown Template -->
+
+Replace with Main Title
+=======================
+
+### Your Name
+
+### `r as.character(Sys.Date())`
+
+```{r echo=FALSE}
+# include this code chunk as-is to set options
+knitr::opts_chunk$set(comment=NA, prompt=TRUE, out.width=750, fig.height=8, fig.width=8)
+library(Rcmdr)
+library(car)
+library(RcmdrMisc)
+```
+
+
+```{r echo=FALSE}
+# include this code chunk as-is to enable 3D graphs
+library(rgl)
+knitr::knit_hooks$set(webgl = hook_webgl)
+```
+
+
+```{r}
+load("/Users/melissahodge/Documents/01-Education/Syracuse/2021/Winter/SCM 651/HM4/Homework 4 Data Set - Universal Bank.csv")
+```
+
+
+```{r}
+UniversalBank <- 
+  read.table("/Users/melissahodge/Documents/01-Education/Syracuse/2021/Winter/SCM 651/HM4/Homework 4 Data Set - Universal Bank.csv",
+   header=TRUE, stringsAsFactors=TRUE, sep=",", na.strings="NA", dec=".", strip.white=TRUE)
+```
+
+```{r}
+GLM.1 <- glm(PersonalLoan ~ Income + Family + Income*Family, family=binomial(logit), 
+  data=UniversalBank)
+summary(GLM.1)
+exp(coef(GLM.1))  # Exponentiated coefficients ("odds ratios")
+```
+
+```{r}
+GLM.2 <- glm(PersonalLoan ~ Income + Mortgage + Income*Mortgage, 
+  family=binomial(logit), data=UniversalBank)
+summary(GLM.2)
+exp(coef(GLM.2))  # Exponentiated coefficients ("odds ratios")
+```
+
+```{r}
+GLM.3 <- glm(PersonalLoan ~ Income +CCAvg + Income*CCAvg, family=binomial(logit), 
+  data=UniversalBank)
+summary(GLM.3)
+exp(coef(GLM.3))  # Exponentiated coefficients ("odds ratios")
+```
+
+```{r}
+GLM.4 <- glm(PersonalLoan ~ Income + CCAvg +Family + Mortgage + CCAvg*Income, 
+  family=binomial(logit), data=UniversalBank)
+summary(GLM.4)
+exp(coef(GLM.4))  # Exponentiated coefficients ("odds ratios")
+```
+
+```{r}
+GLM.5 <- glm(PersonalLoan ~ Income + CCAvg + Family + Income*CCAvg, family=binomial(logit), 
+  data=UniversalBank)
+summary(GLM.5)
+exp(coef(GLM.5))  # Exponentiated coefficients ("odds ratios")
+```
+
+```{r}
+GLM.6 <- glm(PersonalLoan ~ Income + CCAvg + Family +Education + CCAvg*Income, 
+  family=binomial(logit), data=UniversalBank)
+summary(GLM.6)
+exp(coef(GLM.6))  # Exponentiated coefficients ("odds ratios")
+```
+
+```{r}
+UBnet <- neuralnet(PersonalLoan ~ Income + CCAvg + Family + Education + SecuritiesAccount, UniversalBank, hidden=2, 
+  lifesign="minimal", linear.output=FALSE, threshold=0.01)
+```
+
+
+```{r}
+plot(UBnet)
+```
+
+
+```{r}
+UBnet$result.matrix
+```
+
+
+```{r}
+UBnet <- neuralnet(PersonalLoan ~ Income + CCAvg, UniversalBank, hidden=2, lifesign="minimal", 
+  linear.output=FALSE, threshold=0.01)
+```
+
+
+```{r}
+plot(UBnet)
+```
+
+
+```{r}
+UBnet$result.matrix
+```
+
+
