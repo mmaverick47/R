@@ -1,5 +1,7 @@
 # Week 10 - Tableau
 
+Includes video walkthrough of Tableau.
+
 Articles:
 
 1. Business Analytics: Transforming the Role of Management Accountants, Kristine Brands, Management Accounting Quarterly, Spring 2015
